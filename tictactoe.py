@@ -19,19 +19,22 @@ test_board = ['#','X','X','X','O','X','O','X','O','X']
 display_board(test_board)
 
 def player_input():
-  choice = "wrong"
-  range_list = list(range(1,9))
-  # converting in a list of str to check user input
-  str_list = [str(item) for item in range_list]
-
-  while choice not in str_list:
-    choice = input("What cell do you choose? ")
-    if not choice.isdigit():
-      print("Please insert a value between 1 and 9")
-  return choice
+  marker = ''
+  while marker != 'X' and marker != 'O':
+    marker = input("Player 1, choose X or O: ")
+  
+  player_1 = marker
+  if player_1 == "O":
+    player_2 = "X"
+  else:
+    player_2 = "O"
+  
+  return (player_1, player_2)
+  #tuple return
 
 # Testing:
-# print(player_input())
+# player1_marker, player2_marker = player_input()
+# print(player1_marker, player2_marker)
 
 # This Function can take in a player input and assign their marker as 'X' or 'O
 def place_marker(board, marker, position):
@@ -44,16 +47,41 @@ def place_marker(board, marker, position):
 
 # Function that takes in a board and a mark (X or O) and then checks to see if that mark has won. *
 def win_check(board, mark):
-  horiz_triples = []
-  for index,value in enumerate(test_board):
-    if index == 0:
-      pass
-    else:
-      horiz_triples.append(mark)
-      print(horiz_triples)
-      if len(set(horiz_triples)) == 3:
-        return "WIN"
+  board_marks = board[1:]
+  n = 3
+  print(board_marks)
+  arrays_collection = [board_marks[i:i+n] for i in range (0, len(board_marks), n)]
+  print(arrays_collection)
+
+  # check for horizantal wins:
+  for horiz_line in arrays_collection:
+    if len(set(horiz_line)) == 1:
+      print(f"{horiz_line[0]} wins")
+
+
+  # for index,value in enumerate(test_board):
+  #   if index == 0:
+  #     pass
+  #   else:
+  #     horiz_triples.append(mark)
+  #     print(horiz_triples)
+  #     if len(set(horiz_triples)) == 1:
+  #       return "WIN"
 
 
 # Testing:
 print(win_check(test_board,'X'))
+
+
+# # might need this later
+# def player_input():
+#   choice = "wrong"
+#   range_list = list(range(1,9))
+#   # converting in a list of str to check user input
+#   str_list = [str(item) for item in range_list]
+
+#   while choice not in str_list:
+#     choice = input("What cell do you choose? ")
+#     if not choice.isdigit():
+#       print("Please insert a value between 1 and 9")
+#   return choice
