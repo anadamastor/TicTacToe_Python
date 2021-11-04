@@ -8,16 +8,16 @@
 
 # Function to print a given list in a grid system
 def display_board(board):
-  print( f"{board[7]} | {board[8]} | {board[0]}")
+  print( f"{board[7]} | {board[8]} | {board[9]}")
   print("----------")
   print( f"{board[4]} | {board[5]} | {board[6]}")
   print("----------")
   print( f"{board[1]} | {board[2]} | {board[3]}")
 
-test_board = ['#','O','X','O','X','O','O','O','X','']
+# test_board = ['#','O','X','O','X','O','O','O','X','']
 # print(test_board)
 # Testing:
-display_board(test_board)
+# display_board(test_board)
 
 def player_input():
   marker = ''
@@ -39,6 +39,7 @@ def player_input():
 
 # This Function can take in a player input and assign their marker 
 # as 'X' or 'O
+
 def place_marker(board, marker, position):
     # this is changing the original array
     board[position] = marker
@@ -52,7 +53,6 @@ def place_marker(board, marker, position):
 def win_check(board, mark):
   board_marks = board[1:]
   n = 3
-  print(board_marks)
 
   # check for diagonal wins:
   diag1 = []
@@ -121,4 +121,56 @@ def player_choice(board):
 
 # Testing:
 # print(player_choice(test_board))
+
+def replay():
+  play = "no"
+  while play != "Y" and play != "N":
+    play = input("Do you want to play? (Y or N): ")
+  return play == "Y"
+
+# Testing:
+# print(replay())
+
+print('Welcome to Tic Tac Toe!')
+
+while True:
+  #we create an empty array
+  board= ["" for x in range(0,10)]
+  example_board = list(range(0,10))
+
+  print("--------------------------------------")
+  print("\n")
+
+  print("These are the position you can choose:")
+  print("--------------------------------------")
+  display_board(example_board)
+  print("--------------------------------------")
+
+ 
+
+  #ask for the player to feed an input (X or Y)
+  player1_marker, player2_marker = player_input()
+
+  # ask where to place the marker in the board
+  pos_p1 = player_choice(board)
+  #check if the position is free
+  space_check(board, pos_p1)
+  # places the marker within the board
+  place_marker(board, player1_marker, pos_p1)
+  #print updated board
+  display_board(board)
+  # once placed check if player won
+  win_check(board, player1_marker)
+
+
+
+  # while game_on():
+  #   Player 1 Turn
     
+    
+  #   Player2's turn.
+        
+  #     pass
+
+  # if not replay():
+  #   break
