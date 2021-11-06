@@ -59,35 +59,54 @@ def place_marker(board, marker, position):
 # Function that takes in a board and a mark (X or O) and then checks to 
 # see if that mark has won.
 def win_check(board, mark):
-  board_marks = board[1:]
-  n = 3
+  #### need to fix this in order to make it consider
+  ################################################################## work on this
+  # board_marks = board[1:]
+  # n = 3
+  # filtered_list = [x for x in board if x != " "]
+  # if len(filtered_list) >= 3:
+  #   # check for diagonal wins:
+  #   diag1 = []
+  #   for numb in range(1,10,4):
+  #     diag1.append(board[numb])
+  #   print(diag1)
+  #   if len(list(set(diag1))) == 1 and len(diag1) >= 3:
+  #     return True
+    
+  #   diag2 = []
+  #   for numb in range(3,10,2):
+  #     diag2.append(board[numb])
+  #   if len(set(diag2)) == 1 and len(diag2) >= 3:
+  #     return True
 
-  # check for diagonal wins:
-  diag1 = []
-  for numb in range(1,10,4):
-    diag1.append(numb)
-  if len(set(diag1)) == 1:
-    return (f"{diag1[0]} wins")
-  
-  diag2 = []
-  for numb in range(3,10,2):
-    diag2.append(numb)
-  if len(set(diag2)) == 1:
-    return (f"{diag2[0]} wins")
+  #   # check for horizontal wins:
+  #   horizontal_array = [board_marks[i:i+n] for i in range (0, len(board_marks), n)]
+  #   print(horizontal_array)
+  #   for horiz_line in horizontal_array:
+  #     filtered_horiz_list = [x for x in board if x != " "]
+  #     if len(set(filtered_horiz_list)) == 1 and len(filtered_horiz_list) >= 3:
+  #       return True
+    
+  #   # check for vertical wins:
+  #   for i in range(1,4):
+  #     vertical_line = []
+  #     for numb in range(i,10,3):
+  #       vertical_line.append(board[numb])
+  #     filtered_vertic_list = [x for x in board if x != " "]
+  #     if len(set(filtered_vertic_list)) == 1  and len(filtered_vertic_list) >= 3:
+  #       return True
+  # else:
+  #   return False
 
-  # check for horizontal wins:
-  horizontal_array = [board_marks[i:i+n] for i in range (0, len(board_marks), n)]
-  for horiz_line in horizontal_array:
-    if len(set(horiz_line)) == 1:
-      return (f"{horiz_line[0]} wins")
-  
-  # check for vertical wins:
-  for i in range(1,4):
-    vertical_line = []
-    for numb in range(i,10,3):
-      vertical_line.append(board[numb])
-    if len(set(vertical_line)) == 1:
-      return (f"{vertical_line[0]} wins")
+  ############################################################
+    return ((board[7] == mark and board[8] == mark and board[9] == mark) or # across the top
+    (board[4] == mark and board[5] == mark and board[6] == mark) or # across the middle
+    (board[1] == mark and board[2] == mark and board[3] == mark) or # across the bottom
+    (board[7] == mark and board[4] == mark and board[1] == mark) or # down the middle
+    (board[8] == mark and board[5] == mark and board[2] == mark) or # down the middle
+    (board[9] == mark and board[6] == mark and board[3] == mark) or # down the right side
+    (board[7] == mark and board[5] == mark and board[3] == mark) or # diagonal
+    (board[9] == mark and board[5] == mark and board[1] == mark)) # diagonal
   
 # Testing:
 # print(win_check(test_board,'X'))
@@ -108,7 +127,8 @@ def choose_first():
 # freely available.
 def space_check(board, position):
   #true if is free
-  return board[position] != "X" and board[position] != "O"
+  # return board[position] != "X" and board[position] != "O"
+  return board[position] == ' '
  
 # Testing:
 # print(space_check(test_board, 2))
@@ -116,7 +136,11 @@ def space_check(board, position):
 # function that checks if the board is full and returns a boolean value. 
 # True if full, False otherwise
 def full_board_check(board):
-  return board.count("X") + board.count("O") == len(board) - 1
+  # return board.count("X") + board.count("O") == len(board) - 1
+  for i in range(1,10):
+    if space_check(board, i):
+        return False
+  return True
 
 # Testing:
 # print(full_board_check(test_board))
@@ -125,19 +149,16 @@ def full_board_check(board):
 # and then uses the function from step 6 to check if it's a free position
 
 def player_choice(board):
-  choice = "wrong"
+  choice = 0
   range_list = list(range(1,10))
   # converting in a list of str to check user input
   str_list = [str(item) for item in range_list]
   
-  while choice not in str_list:
+  while choice not in str_list and space_check(board,int(choice)):
     choice = input("What cell do you choose? ")
+    return int(choice)
     if not choice.isdigit():
       print("Please insert a value between 1 and 9")
-  
-  # if free (empty) return position
-  if space_check(board,int(choice)):
-    return int(choice)
 
 # Testing:
 # print(player_choice(test_board))

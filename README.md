@@ -1,2 +1,6 @@
 # TicTacToe_Python
-First milestone project of Python Zero to Hero Udemy course.
+
+First project of Python Zero to Hero Udemy course.
+
+
+![alt text](../pics/gameplay.jpg)

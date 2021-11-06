@@ -36,6 +36,7 @@ while True:
       # place the marker on the position
       tictactoe.place_marker(the_board, player1_marker, position)
 
+      print("------------------------- ")
       # check if they won
       if tictactoe.win_check(the_board, player1_marker):
         tictactoe.display_board(the_board)
@@ -62,6 +63,7 @@ while True:
       tictactoe.place_marker(the_board, player2_marker, position)
 
       # check if they won
+      print("------------------------- ")
       if tictactoe.win_check(the_board, player2_marker):
         tictactoe.display_board(the_board)
         print("PLAYER 2 WON")
@@ -75,6 +77,6 @@ while True:
             break
         else:
           turn = "Player 1"
-
-  if not replay():
+  print("------------------------- ")
+  if not tictactoe.replay():
     break
