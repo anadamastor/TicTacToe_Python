@@ -1,6 +1,6 @@
 # TicTacToe_Python
 
-First project of Python Zero to Hero Udemy course.
 
+Interactive CLI Tic Tac Toe written in Python 3. 
 
 ![alt text](/pics/gameplay.jpg)
