@@ -3,4 +3,4 @@
 First project of Python Zero to Hero Udemy course.
 
 
-![alt text](../pics/gameplay.jpg)
+![alt text](/pics/gameplay.jpg)
